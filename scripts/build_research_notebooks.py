@@ -15,8 +15,8 @@ import matplotlib.pyplot as plt
 from IPython import get_ipython
 from IPython.display import display, Markdown
 root = next(p for p in [Path.cwd(), *Path.cwd().parents]
-            if (p/'research/c40_geometry').is_dir())
-study = root/'research/c40_geometry'
+            if (p/'study_plan.md').is_file())
+study = root
 # Подключаем проверенные геодезические функции без запуска скриптов
 sys.path.insert(0, str(root/'europe/scripts'))
 from audit_c40_radial_cases import ellipsoid_distance, validate_distance

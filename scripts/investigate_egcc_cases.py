@@ -11,8 +11,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-ROOT=Path(__file__).resolve().parents[3]
-STUDY=ROOT/'research/c40_geometry'
+ROOT=Path(__file__).resolve().parents[1]
+STUDY=ROOT
 sys.path.insert(0,str(ROOT/'europe/scripts'))
 from audit_c40_radial_cases import ellipsoid_distance
 from investigate_c40_geometry import distance
@@ -118,10 +118,10 @@ $$\Delta t\approx |d-r|/|v_r|.$$
 '''
     (reports/'03_egcc_cases.md').write_text('# Разбор шести радиальных записей EGCC\n\n'+explanation+'\n\n```text\n'+cases[['flight_id','typecode','sphere_m','wgs84_m','minutes_to_landing','point_rows','same_board_other_rows_30d']].to_string(index=False)+'\n```\n',encoding='utf8')
     notebook=nbformat.v4.new_notebook(cells=[nbformat.v4.new_markdown_cell('# Конкретные радиальные случаи EGCC\n\nИсточник и локальный контекст каждой записи. Все строки сохраняются.'),
-       nbformat.v4.new_code_cell("from pathlib import Path\nimport pandas as pd\nfrom IPython.display import display, Image\nroot=next(p for p in [Path.cwd(),*Path.cwd().parents] if (p/'research/c40_geometry/reports/03_egcc_case_review.csv').exists())\nstudy=root/'research/c40_geometry'\ncases=pd.read_csv(study/'reports/03_egcc_case_review.csv')\ndisplay(cases[['flight_id','typecode','GoA','sphere_m','wgs84_m','minutes_to_landing','point_rows','same_board_other_rows_30d']])"),
+       nbformat.v4.new_code_cell("from pathlib import Path\nimport pandas as pd\nfrom IPython.display import display, Image\nroot=next(p for p in [Path.cwd(),*Path.cwd().parents] if (p/'reports/03_egcc_case_review.csv').exists())\nstudy=root\ncases=pd.read_csv(study/'reports/03_egcc_case_review.csv')\ndisplay(cases[['flight_id','typecode','GoA','sphere_m','wgs84_m','minutes_to_landing','point_rows','same_board_other_rows_30d']])"),
        nbformat.v4.new_markdown_cell(explanation),
        nbformat.v4.new_code_cell("display(Image(filename=str(study/'figures/03_egcc_cases.png')))\ndisplay(pd.read_csv(study/'reports/03_egcc_sampling_scenarios.csv'))"),
-       nbformat.v4.new_markdown_cell('Воспроизведение: `.\\.venv\\Scripts\\python.exe -u -X utf8 research/c40_geometry/scripts/investigate_egcc_cases.py`. Исторические координаты и ссылки – в 01_historical_arp. Геодезические методы – Vincenty (1975), https://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf ; Karney (2013), https://doi.org/10.1007/s00190-012-0578-z . Формула временного сценария – наша локальная кинематическая оценка, не результат этих статей.')])
+       nbformat.v4.new_markdown_cell('Воспроизведение: `.\\.venv\\Scripts\\python.exe -u -X utf8 scripts/investigate_egcc_cases.py`. Исторические координаты и ссылки – в 01_historical_arp. Геодезические методы – Vincenty (1975), https://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf ; Karney (2013), https://doi.org/10.1007/s00190-012-0578-z . Формула временного сценария – наша локальная кинематическая оценка, не результат этих статей.')])
     notebook.metadata['kernelspec']=dict(display_name='Python 3',language='python',name='python3')
     write_overview(notebook,STUDY/'notebooks/03_egcc_cases.ipynb')
     print(json.dumps(summary,ensure_ascii=False),flush=True)

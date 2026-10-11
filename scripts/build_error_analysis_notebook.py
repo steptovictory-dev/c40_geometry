@@ -26,8 +26,8 @@ from IPython import get_ipython
 from IPython.display import display, Markdown
 if get_ipython() is not None:
     get_ipython().run_line_magic('matplotlib','inline')
-root = next(p for p in [Path.cwd(),*Path.cwd().parents] if (p/'research/c40_geometry').is_dir())
-study = root/'research/c40_geometry'
+root = next(p for p in [Path.cwd(),*Path.cwd().parents] if (p/'study_plan.md').is_file())
+study = root
 plt.rcParams.update({'figure.dpi':120,'font.size':11,'axes.spines.top':False,'axes.spines.right':False})
 model_path = study/'data/public_pilot/08_ridge_model.npz'
 model_sha = hashlib.sha256(model_path.read_bytes()).hexdigest()

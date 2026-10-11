@@ -7,8 +7,8 @@ import sys
 import numpy as np
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[3]
-STUDY = ROOT / 'research/c40_geometry'
+ROOT = Path(__file__).resolve().parents[1]
+STUDY = ROOT
 sys.path.insert(0, str(ROOT / 'europe/scripts'))
 from audit_c40_radial_cases import ellipsoid_distance
 

@@ -34,8 +34,8 @@ class TextParser(HTMLParser):
         if not self.hidden and data.strip():
             self.parts.append(data.strip())
 
-ROOT = Path(__file__).resolve().parents[3]
-STUDY = ROOT / 'research/c40_geometry'
+ROOT = Path(__file__).resolve().parents[1]
+STUDY = ROOT
 FILES = STUDY / 'literature/files'
 SLICES = [('EGCC', '2018-12-06'), ('EGCC', '2019-01-03'),
           ('EGCC', '2019-11-07'), ('EGCC', '2020-01-30'),

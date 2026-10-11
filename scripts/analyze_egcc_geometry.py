@@ -12,8 +12,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-ROOT = Path(__file__).resolve().parents[3]
-STUDY = ROOT / 'research/c40_geometry'
+ROOT = Path(__file__).resolve().parents[1]
+STUDY = ROOT
 sys.path.insert(0, str(ROOT / 'europe/scripts'))
 # Импортируем проверенные чистые функции; европейские файлы не изменяются.
 from audit_c40_radial_cases import ellipsoid_distance, validate_distance
@@ -110,10 +110,10 @@ $$|d(A,P)-d(A,\widehat P)|\le d(P,\widehat P)\le\epsilon.$$
     report += '\n\nВсе строки сохранены. Сфера и WGS84 дают разные расстояния; используемая авторами модель расстояния пока не установлена. Азимут не является магнитным курсом захода.\n'
     (reports/'02_egcc_geometry.md').write_text(report,encoding='utf8')
     nb=nbformat.v4.new_notebook(cells=[nbformat.v4.new_markdown_cell('# EGCC – независимая геометрическая проверка\n\nARP подтвержден историческими AD 2.2. Данные читаются из Европы, результаты сохраняются в research. Все записи сохраняются.'),
-        nbformat.v4.new_code_cell("from pathlib import Path\nimport pandas as pd\nfrom IPython.display import display, Image\nroot = next(p for p in [Path.cwd(), *Path.cwd().parents] if (p/'research/c40_geometry/reports/egcc_geometry_audit.json').exists())\nstudy=root/'research/c40_geometry'\ndisplay(pd.read_csv(study/'reports/egcc_geometry_by_label.csv'))"),
+        nbformat.v4.new_code_cell("from pathlib import Path\nimport pandas as pd\nfrom IPython.display import display, Image\nroot = next(p for p in [Path.cwd(), *Path.cwd().parents] if (p/'reports/egcc_geometry_audit.json').exists())\nstudy=root\ndisplay(pd.read_csv(study/'reports/egcc_geometry_by_label.csv'))"),
         nbformat.v4.new_markdown_cell(mathematical),
         nbformat.v4.new_code_cell("display(Image(filename=str(study/'figures/02_egcc_geometry.png')))"),
-        nbformat.v4.new_markdown_cell('Воспроизведение из корня: `.\\.venv\\Scripts\\python.exe -u -X utf8 research/c40_geometry/scripts/analyze_egcc_geometry.py`. Различия между GoA показаны описательно; причинный эффект и статистическая значимость не оценивались.')])
+        nbformat.v4.new_markdown_cell('Воспроизведение из корня: `.\\.venv\\Scripts\\python.exe -u -X utf8 scripts/analyze_egcc_geometry.py`. Различия между GoA показаны описательно; причинный эффект и статистическая значимость не оценивались.')])
     nb.metadata['kernelspec']=dict(display_name='Python 3',language='python',name='python3')
     write_overview(nb,STUDY/'notebooks/02_egcc_geometry.ipynb')
     assert len(frame)==87435 and int(frame.GoA.sum())==306

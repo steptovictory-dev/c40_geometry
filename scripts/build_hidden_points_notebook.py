@@ -39,8 +39,8 @@ if get_ipython() is not None:
 
 # Находим корень проекта независимо от папки запуска ноутбука
 root = next(p for p in [Path.cwd(), *Path.cwd().parents]
-            if (p / 'research/c40_geometry/scripts/evaluate_hidden_points.py').exists())
-study = root / 'research/c40_geometry'
+            if (p / 'scripts/evaluate_hidden_points.py').exists())
+study = root
 sys.path.insert(0, str(study / 'scripts'))
 # Используем общий код эксперимента и кинематического метода
 from evaluate_hidden_points import main as run_experiment, forward

@@ -13,8 +13,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-ROOT=Path(__file__).resolve().parents[3]
-STUDY=ROOT/'research/c40_geometry'
+ROOT=Path(__file__).resolve().parents[1]
+STUDY=ROOT
 sys.path.insert(0,str(ROOT/'europe/scripts'))
 from audit_c40_radial_cases import ellipsoid_distance
 from investigate_c40_geometry import distance
@@ -125,7 +125,7 @@ def main():
 Ни координаты метаданных, ни OpenSky не объявляются истинными без дальнейшей проверки. Все исходные значения и строки сохраняются. Источник: https://opensky-network.org/datasets/ ; SHA256 двух архивов – в отчетах 05_public_pilot_download*.json.
 '''
     (STUDY/'reports/06_epwa_controls.md').write_text(note+'\n```json\n'+json.dumps(summary,ensure_ascii=False,indent=2)+'\n```\n',encoding='utf8')
-    nb=nbformat.v4.new_notebook(cells=[nbformat.v4.new_markdown_cell(note),nbformat.v4.new_code_cell("from pathlib import Path\nimport pandas as pd\nfrom IPython.display import display, Image\nroot=next(p for p in [Path.cwd(),*Path.cwd().parents] if (p/'research/c40_geometry/reports/06_epwa_control_comparison.csv').exists())\nstudy=root/'research/c40_geometry'\ntable=pd.read_csv(study/'reports/06_epwa_control_comparison.csv')\ndisplay(table)\ndisplay(Image(filename=str(study/'figures/06_epwa_controls.png')))"),nbformat.v4.new_markdown_cell('Воспроизведение: `.\\.venv\\Scripts\\python.exe -u -X utf8 research/c40_geometry/scripts/compare_public_epwa_controls.py`. Крупное расхождение – диагностическое наблюдение, не правило удаления. Следующая проверка: другая дата, исходное объединение полей, возможность систематической ошибки координат.')])
+    nb=nbformat.v4.new_notebook(cells=[nbformat.v4.new_markdown_cell(note),nbformat.v4.new_code_cell("from pathlib import Path\nimport pandas as pd\nfrom IPython.display import display, Image\nroot=next(p for p in [Path.cwd(),*Path.cwd().parents] if (p/'reports/06_epwa_control_comparison.csv').exists())\nstudy=root\ntable=pd.read_csv(study/'reports/06_epwa_control_comparison.csv')\ndisplay(table)\ndisplay(Image(filename=str(study/'figures/06_epwa_controls.png')))"),nbformat.v4.new_markdown_cell('Воспроизведение: `.\\.venv\\Scripts\\python.exe -u -X utf8 scripts/compare_public_epwa_controls.py`. Крупное расхождение – диагностическое наблюдение, не правило удаления. Следующая проверка: другая дата, исходное объединение полей, возможность систематической ошибки координат.')])
     nb.metadata['kernelspec']=dict(display_name='Python 3',language='python',name='python3')
     write_overview(nb,STUDY/'notebooks/06_epwa_controls.ipynb')
     print(json.dumps(summary,ensure_ascii=False,indent=2),flush=True)

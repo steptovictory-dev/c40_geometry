@@ -10,8 +10,8 @@ import matplotlib.pyplot as plt
 import nbformat
 from notebook_output import write_overview
 
-ROOT=Path(__file__).resolve().parents[3]
-STUDY=ROOT/'research/c40_geometry'
+ROOT=Path(__file__).resolve().parents[1]
+STUDY=ROOT
 sys.path.insert(0,str(ROOT/'europe/scripts'))
 from investigate_c40_geometry import distance
 from audit_c40_radial_cases import ellipsoid_distance
@@ -99,7 +99,7 @@ def main():
 '''
     note+='\nВ момент метаданных существует наблюдение OpenSky с тем же ICAO24 и callsign, но расстояние между позициями около 43 км. Определение радиальной границы само по себе не объясняет пространственное несоответствие. Причина и источник расхождения пока не установлены. Проверку дополнить независимым историческим ARP и другими случаями.\n'
     (STUDY/'reports/05_public_pilot.md').write_text(note+'\n```json\n'+json.dumps(result,ensure_ascii=False,indent=2)+'\n```\n',encoding='utf8')
-    nb=nbformat.v4.new_notebook(cells=[nbformat.v4.new_markdown_cell(note),nbformat.v4.new_code_cell("from pathlib import Path\nimport json\nimport pandas as pd\nfrom IPython.display import display, Image\nroot=next(p for p in [Path.cwd(),*Path.cwd().parents] if (p/'research/c40_geometry/reports/05_public_pilot_audit.json').exists())\nstudy=root/'research/c40_geometry'\nprint(json.dumps(json.loads((study/'reports/05_public_pilot_audit.json').read_text()),ensure_ascii=False,indent=2))\ndisplay(pd.read_csv(study/'reports/05_public_pilot_crossings.csv'))\ndisplay(Image(filename=str(study/'figures/05_public_pilot.png')))"),nbformat.v4.new_markdown_cell('Источник: https://opensky-network.org/datasets/ ; описание публичных state vectors: https://opensky-network.org/data/scientific . Геодезическая формула: Vincenty (1975), https://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf . Воспроизведение: scripts/select_public_cases.py → probe_public_snapshots.py → fetch_public_pilot.py → analyze_public_pilot.py. Все результаты поиска относятся к публичным источникам; Trino не использовался.')])
+    nb=nbformat.v4.new_notebook(cells=[nbformat.v4.new_markdown_cell(note),nbformat.v4.new_code_cell("from pathlib import Path\nimport json\nimport pandas as pd\nfrom IPython.display import display, Image\nroot=next(p for p in [Path.cwd(),*Path.cwd().parents] if (p/'reports/05_public_pilot_audit.json').exists())\nstudy=root\nprint(json.dumps(json.loads((study/'reports/05_public_pilot_audit.json').read_text()),ensure_ascii=False,indent=2))\ndisplay(pd.read_csv(study/'reports/05_public_pilot_crossings.csv'))\ndisplay(Image(filename=str(study/'figures/05_public_pilot.png')))"),nbformat.v4.new_markdown_cell('Источник: https://opensky-network.org/datasets/ ; описание публичных state vectors: https://opensky-network.org/data/scientific . Геодезическая формула: Vincenty (1975), https://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf . Воспроизведение: scripts/select_public_cases.py → probe_public_snapshots.py → fetch_public_pilot.py → analyze_public_pilot.py. Все результаты поиска относятся к публичным источникам; Trino не использовался.')])
     nb.metadata['kernelspec']=dict(display_name='Python 3',language='python',name='python3')
     write_overview(nb,STUDY/'notebooks/05_public_trajectory.ipynb')
     print(json.dumps(result,ensure_ascii=False,indent=2),flush=True)

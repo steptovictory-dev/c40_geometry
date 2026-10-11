@@ -7,8 +7,8 @@ import shutil
 import sys
 import requests
 
-ROOT=Path(__file__).resolve().parents[3]
-STUDY=ROOT/'research/c40_geometry'
+ROOT=Path(__file__).resolve().parents[1]
+STUDY=ROOT
 FILES=STUDY/'literature/files'
 SOURCES=[
     dict(id='figuet_2023',title='Analysing the Impact of Go-Around Occurrences at Large European Airports',date='2023-12-14',url='https://journals.open.tudelft.nl/joas/article/download/7219/5898',filename='Figuet_et_al_2023_go_arounds.pdf',local='docs/sources/files/Figuet_et_al_2023_go_arounds.pdf',role='Происхождение C40 и объединение OpenSky/EU-NM; разделы 2.2–2.3',locator='PDF стр. 4, печатная стр. 4'),

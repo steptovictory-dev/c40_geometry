@@ -40,8 +40,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from IPython import get_ipython
 from IPython.display import display, Markdown
-root = next(p for p in [Path.cwd(),*Path.cwd().parents] if (p/'research/c40_geometry').is_dir())
-study = root/'research/c40_geometry'
+root = next(p for p in [Path.cwd(),*Path.cwd().parents] if (p/'study_plan.md').is_file())
+study = root
 sys.path.insert(0,str(study/'scripts'))
 from evaluate_hidden_points import main as evaluate_baselines
 from audit_c40_radial_cases import ellipsoid_distance

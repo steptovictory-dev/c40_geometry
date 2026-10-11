@@ -6,8 +6,8 @@ import json
 import requests
 import pandas as pd
 
-ROOT=Path(__file__).resolve().parents[3]
-STUDY=ROOT/'research/c40_geometry'
+ROOT=Path(__file__).resolve().parents[1]
+STUDY=ROOT
 
 
 def main():
